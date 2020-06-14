@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session')
 const path = require('path');
 const cors = require('cors');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
 
 const routes = require('./config/route');
 const app = express();
@@ -23,24 +21,6 @@ app.use(cookieSession({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const swaggerOptions = {
-	swaggerDefinition: {
-		info: {
-			title: "EDGE TEST",
-			description: "API para test de Edge",
-			contact: {
-				name: "Marcelo Medina"
-			},
-			servers: ["http://localhost:3000"]
-		}
-	},
-	apis: ["index.js"],
-	basePath: '/'
-}
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //extensión para rutas.
 routes.api(app);
