@@ -8,6 +8,10 @@ ingresar al proyecto:
 
 `cd ./edge_test`
 
+instalar las dependencias: 
+
+`npm install`
+
 iniciar el servidor:
 
 `npm start`
