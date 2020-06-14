@@ -1,0 +1,219 @@
+swagger: "2.0"
+info:
+  description: "Es un test de REST API para EDGE"
+  version: "1.0.0"
+  title: "EDGE TEST"
+  contact:
+    email: "marcelomedina10@outlook.com"
+host: "localhost:3000"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /token:
+    post:
+      tags:
+      - "token"
+      summary: "Generar token para el test"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "ingresar 'edge'"
+        required: true
+        schema:
+          $ref: "#/definitions/Token"
+      responses:
+        "200":
+          description: "Success token"
+        "400":
+          description: "Ha ocurrido un error"
+        "401":
+          description: "Unauthorized"
+  /posts:
+    get:
+      tags:
+      - "posts"
+      summary: "Listar los posts"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+      responses:
+        "200":
+          description: "Success token"
+        "400":
+          description: "Ha ocurrido un error"
+        "401":
+          description: "Unauthorized"
+    post:
+      tags:
+      - "posts"
+      summary: "crear Posts"
+      description: ""
+      operationId: "createPosts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+      - in: "body"
+        name: "post"
+        description: "datos a editar"
+        schema:
+          type: "object"
+          properties:
+            title:
+              type: "string"
+            body:
+              type: "string"
+            userId:
+              type: "integer"
+      responses:
+        "200":
+          description: "Success token"
+        "400":
+          description: "Ha ocurrido un error"
+        "401":
+          description: "Unauthorized"
+  /posts/{post}:        
+    put:
+      tags:
+      - "posts"
+      summary: "Editar Posts"
+      description: ""
+      operationId: "updatePosts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+      - in: "path"
+        name: "post"
+        type: "string"
+        required: true
+      - in: "body"
+        name: "post"
+        description: "datos a editar"
+        schema:
+          type: "object"
+          properties:
+            title:
+              type: "string"
+            body:
+              type: "string"
+            userId:
+              type: "integer"
+      responses:
+        "200":
+          description: "Success token"
+        "400":
+          description: "Ha ocurrido un error"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not Found"
+    get:
+      tags:
+      - "posts"
+      summary: "ver Post"
+      description: ""
+      operationId: "showPosts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+      - in: "path"
+        name: "post"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "Success token"
+        "400":
+          description: "Ha ocurrido un error"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not Found"
+    delete:
+      tags:
+      - "posts"
+      summary: "eliminar Posts"
+      description: ""
+      operationId: "deletePosts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+      - in: "path"
+        name: "post"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "Success token"
+        "400":
+          description: "Ha ocurrido un error"
+        "401":
+          description: "Unauthorized"
+        "404":
+          description: "Not Found"
+
+definitions:
+  Token:
+    type: "object"
+    properties:
+      name: 
+        type: "string"
+      password:
+        type: "string"
+  Posts:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      userId:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      body:
+        type: "string"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
